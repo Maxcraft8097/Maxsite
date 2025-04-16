@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Maxsite – Addons</title>
+  <style>
+    body { background-color: #121212; color: white; font-family: Arial; padding: 20px; }
+    .addon { background-color: #1e1e1e; border: 1px solid #444; margin-bottom: 20px; padding: 15px; border-radius: 8px; }
+    .addon a { color: #00ffcc; text-decoration: none; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Alle Maxsite-Addons</h1>
+  <div id="addon-list"></div>
+  <script>
+    fetch('/data/addons.json')
+      .then(response => response.json())
+      .then(addons => {
+        const container = document.getElementById('addon-list');
+        addons.forEach(addon => {
+          const div = document.createElement('div');
+          div.className = 'addon';
+          div.innerHTML = `<h2>${addon.title}</h2><p>${addon.description}</p><a href="/addons/${addon.id}.html">Mehr erfahren</a>`;
+          container.appendChild(div);
+        });
+      });
+  </script>
+</body>
+</html>
